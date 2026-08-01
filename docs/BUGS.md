@@ -113,6 +113,36 @@ Likely caused by migration to Google's new authentication flow.
 
 ---
 
+## BUG-006
+
+### Title
+
+Gateway launcher fails on Windows with non-ASCII usernames.
+
+### Status
+
+Workaround implemented.
+
+### Symptoms
+
+- Windows Script Host error
+- gateway.vbs cannot locate gateway.cmd
+- automatic startup fails
+
+### Cause
+
+OpenClaw generates launcher scripts using absolute paths that become corrupted when the Windows username contains non-ASCII characters.
+
+### Workaround
+
+Run:
+
+scripts/repair-gateway.ps1
+
+### Upstream
+
+Should be reported to OpenClaw.
+
 # Bug Status Legend
 
 ✅ Fixed
