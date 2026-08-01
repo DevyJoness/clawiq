@@ -1,221 +1,392 @@
 # ClawIQ Setup Guide
 
-This guide describes how to set up ClawIQ from scratch.
+This document describes the complete installation and configuration process for ClawIQ.
 
 ---
 
 # Requirements
 
-## Software
-
-- Windows 11 (recommended)
-- Node.js
+- Windows 11
+- Node.js (latest LTS recommended)
 - Git
 - Ollama
-- OpenClaw
-- Telegram
+- Telegram Bot Token
 - GitHub account
 
-Optional:
-
-- Gemini CLI
-- Notion
-- Docker
-
 ---
 
-# Installation
+# Repository
 
-## 1. Install Node.js
-
-Download:
-
-https://nodejs.org/
-
-Verify:
+Clone the repository.
 
 ```bash
-node -v
-npm -v
+git clone https://github.com/DevyJoness/clawiq.git
 ```
 
 ---
 
-## 2. Install Git
+# Install OpenClaw
 
-Download:
+Install globally using npm.
 
-https://git-scm.com/
-
-Verify:
-
-```bash
-git --version
-```
-
----
-
-## 3. Install Ollama
-
-Download:
-
-https://ollama.com/
-
-Verify:
-
-```bash
-ollama --version
-```
-
----
-
-## 4. Download Models
-
-Current models:
-
-```bash
-ollama pull qwen3:14b
-```
-
-```bash
-ollama pull qwen2.5vl:7b
-```
-
----
-
-## 5. Install OpenClaw
-
-```bash
+```powershell
 npm install -g openclaw
 ```
 
-Verify:
+Verify installation.
 
-```bash
+```powershell
 openclaw --version
 ```
 
 ---
 
-## 6. Configure OpenClaw
+# Install Ollama
+
+Download and install Ollama.
+
+Verify:
+
+```powershell
+ollama --version
+```
+
+---
+
+# Download Models
+
+Main model:
+
+```powershell
+ollama pull qwen3:14b
+```
+
+Vision model:
+
+```powershell
+ollama pull qwen2.5vl:7b
+```
+
+Verify:
+
+```powershell
+ollama list
+```
+
+---
+
+# Configure OpenClaw
 
 Run:
 
-```bash
+```powershell
 openclaw configure
 ```
 
 Configure:
 
+- Workspace
 - Gateway
-- OpenAI
 - Telegram
 - Ollama
 
 ---
 
-## 7. Configure Gateway
+# Configure Telegram
 
-Install service:
+Create a bot using BotFather.
 
-```bash
-openclaw gateway install
-```
-
-Check:
-
-```bash
-openclaw gateway status --deep
-```
+Add the token inside OpenClaw configuration.
 
 ---
 
-## 8. Configure Telegram
+# Configure Gateway
 
-Create Telegram Bot
+Gateway should be configured as:
 
-Save token
+- Mode: Local
+- Bind: Loopback
+- Port: 18789
 
-Connect channel
+Verify:
 
-Verify communication
-
----
-
-## 9. Verify Installation
-
-Gateway
-
-```bash
+```powershell
 openclaw gateway status
 ```
 
-Models
+Dashboard:
 
-```bash
-openclaw models status
 ```
-
-Ollama
-
-```bash
-ollama ps
+http://127.0.0.1:18789
 ```
 
 ---
 
-# Current Models
+# Configure Models
 
-Primary
+Run:
 
-- GPT-5.5
+```powershell
+openclaw configure --section model
+```
 
-Fallback
+Select:
 
-- Qwen3 14B
+Primary model
 
-Vision
+```
+ollama/qwen3:14b
+```
 
-- Qwen2.5VL
+Vision model
+
+```
+ollama/qwen2.5vl:7b
+```
+
+Verify:
+
+```powershell
+openclaw agents list
+```
+
+Expected:
+
+```
+Model:
+ollama/qwen3:14b
+```
 
 ---
-## OpenClaw Notes
 
-OpenClaw parses IDENTITY.md using plain fields:
+# Gateway Autostart
+
+OpenClaw creates:
+
+```
+~/.openclaw/gateway.cmd
+
+~/.openclaw/gateway.vbs
+```
+
+If automatic startup fails after installation or update:
+
+Run
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/repair-gateway.ps1
+```
+
+This repairs:
+
+- gateway.cmd
+- gateway.vbs
+
+---
+
+# Known Windows Issue
+
+OpenClaw currently generates launcher files using absolute paths.
+
+Windows usernames containing non-ASCII characters (for example Cyrillic usernames) may break:
+
+- gateway.cmd
+- gateway.vbs
+
+ClawIQ includes a repair script:
+
+```
+scripts/repair-gateway.ps1
+```
+
+---
+
+# Verify Gateway
+
+Run:
+
+```powershell
+openclaw gateway status
+```
+
+Expected:
+
+```
+Runtime: running
+
+Connectivity probe: ok
+```
+
+---
+
+# Verify Telegram
+
+Send a message to the bot.
+
+Expected:
+
+- reply received
+- no Model Fallback
+- provider = Ollama
+
+---
+
+# Identity
+
+Workspace contains:
+
+```
+IDENTITY.md
+```
+
+OpenClaw reads identity from plain fields.
 
 Correct:
 
+```
 - Name: ClawIQ
+- Theme: Personal AI Operating System
+- Emoji: 🧠
+```
 
 Incorrect:
 
+```
 - **Name:** ClawIQ
-  
-# Known Issues
+```
 
-## BUG-003
+Update identity:
 
-Windows Companion authentication.
-
----
-
-## BUG-004
-
-Vision crashes on AMD GPU.
+```powershell
+openclaw agents set-identity --agent main --workspace "$env:USERPROFILE\.openclaw\workspace" --from-identity
+```
 
 ---
 
-## BUG-005
+# GitHub Documentation
 
-Gemini OAuth migration.
+Project documentation is stored in:
+
+```
+docs/
+
+README.md
+ARCHITECTURE.md
+ROADMAP.md
+SETUP.md
+BUGS.md
+MAINTENANCE.md
+```
+
+Prompt library:
+
+```
+docs/prompts/
+
+system-v1.md
+coding-v1.md
+vision-v1.md
+router-v1.md
+```
 
 ---
 
-# Future Setup
+# Maintenance
+
+Repair gateway:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/repair-gateway.ps1
+```
+
+Stop Ollama:
+
+```powershell
+taskkill /IM ollama.exe /F
+```
+
+Start Ollama:
+
+```powershell
+ollama serve
+```
+
+Loaded models:
+
+```powershell
+ollama ps
+```
+
+Installed models:
+
+```powershell
+ollama list
+```
+
+---
+
+# Current Architecture
+
+```
+Telegram
+
+↓
+
+OpenClaw Gateway
+
+↓
+
+Agent (main / ClawIQ)
+
+↓
+
+Ollama
+
+↓
+
+Qwen3:14b
+
+↓
+
+Future Router
+
+↓
+
+Future Skills
+
+↓
+
+Future Memory
+```
+
+---
+
+# Current Status
+
+Completed
+
+- GitHub repository
+- Documentation
+- Gateway
+- Telegram
+- Ollama
+- Qwen3
+- Vision model
+- Prompt library
+- Gateway repair script
+
+In Progress
+
+- Vision integration
+- Gemini integration
+- Agent identity
+- Router
+- Memory
 
 Planned
 
-- Docker
-- VPS
-- Raspberry Pi
-- Home Server
+- Web UI
+- Mobile application
+- Multi-agent system
+- ClawIQ Router
+- Cloud deployment
