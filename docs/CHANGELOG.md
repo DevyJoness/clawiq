@@ -1,3 +1,18 @@
+# v0.1.1 - Multi-Provider Failover
+
+## Added
+- Google Gemini provider configuration.
+- Multi-provider failover chain.
+- VS Code workspace settings.
+
+## Fixed
+- Corrected Ollama fallback model id (`qwen3:14b`).
+- Verified provider failover sequence.
+
+## Known Issues
+- Gemini API quota (429 RESOURCE_EXHAUSTED).
+- OpenAI OAuth/Codex usage limit.
+
 # Changelog
 
 All notable changes to this project will be documented in this file.

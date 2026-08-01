@@ -1,16 +1,30 @@
 {
-    "files.autoSave": "afterDelay",
-    "files.autoSaveDelay": 1000,
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.wordWrap": "bounded",
+  "editor.wordWrapColumn": 100,
+  "editor.rulers": [
+    100
+  ],
 
-    "editor.formatOnSave": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.eol": "\n",
 
-    "editor.minimap.enabled": true,
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
 
-    "editor.wordWrap": "on",
+  "[markdown]": {
+    "editor.wordWrap": "on"
+  },
 
-    "git.enableSmartCommit": true,
+  "git.autofetch": true,
+  "git.confirmSync": false,
 
-    "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
 
-    "markdown.preview.breaks": true
+  "terminal.integrated.defaultProfile.windows": "PowerShell"
 }

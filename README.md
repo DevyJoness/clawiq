@@ -1,8 +1,8 @@
 # ClawIQ
-> 🚀 Current stable release: **v0.1.0 – Foundation Release**
+> 🚀 Current stable release: **v0.1.1 – Multi-Provider Failover**
 
 ClawIQ is currently in active development.
-![Version](https://img.shields.io/badge/version-v0.1.0--alpha-blue)
+![Version](https://img.shields.io/badge/version-v0.1.1-blue)
 
 ![Status](https://img.shields.io/badge/status-active-success)
 
@@ -234,3 +234,18 @@ the experience should stay consistent.
 One AI.
 
 Many Brains.
+
+
+## AI Stack
+
+- Primary: Ollama Qwen3:14B
+- Cloud fallback: Google Gemini 3.1 Pro Preview
+- Secondary fallback: OpenAI GPT-5.5
+- Vision: Ollama Qwen2.5VL
+
+## What's new in v0.1.1
+
+- Multi-provider failover verified.
+- Google Gemini provider configured.
+- VS Code workspace settings added.
+- Fixed Ollama fallback model identifier.

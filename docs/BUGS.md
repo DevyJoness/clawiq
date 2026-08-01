@@ -152,3 +152,10 @@ Should be reported to OpenClaw.
 🔴 Open
 
 🟡 Monitoring
+
+
+## BUG-006 Gemini API
+429 RESOURCE_EXHAUSTED while using Gemini API key.
+
+## BUG-007 OpenAI OAuth
+Codex/OpenAI usage limit reached during fallback tests.

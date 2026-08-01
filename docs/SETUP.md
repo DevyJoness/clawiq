@@ -390,3 +390,12 @@ Planned
 - Multi-agent system
 - ClawIQ Router
 - Cloud deployment
+
+
+## Default Routing
+Primary: ollama/qwen3:14b
+Fallbacks:
+1. google/gemini-3.1-pro-preview
+2. openai/gpt-5.5
+3. ollama/qwen2.5vl:7b
+Vision: ollama/qwen2.5vl:7b
