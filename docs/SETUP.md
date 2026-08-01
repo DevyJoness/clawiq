@@ -179,7 +179,18 @@ Vision
 - Qwen2.5VL
 
 ---
+## OpenClaw Notes
 
+OpenClaw parses IDENTITY.md using plain fields:
+
+Correct:
+
+- Name: ClawIQ
+
+Incorrect:
+
+- **Name:** ClawIQ
+  
 # Known Issues
 
 ## BUG-003
