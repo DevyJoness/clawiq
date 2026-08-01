@@ -1,4 +1,7 @@
 # ClawIQ
+> 🚀 Current stable release: **v0.1.0 – Foundation Release**
+
+ClawIQ is currently in active development.
 ![Version](https://img.shields.io/badge/version-v0.1.0--alpha-blue)
 
 ![Status](https://img.shields.io/badge/status-active-success)
@@ -19,7 +22,29 @@ ClawIQ is an AI orchestration platform that combines multiple language models, l
 Instead of relying on a single model, ClawIQ automatically routes every task to the most suitable AI while preserving one shared experience across all interfaces.
 
 ---
+## Current Status
 
+Current Version: **v0.1.0**
+
+### Completed
+
+- ✅ Project architecture
+- ✅ Documentation
+- ✅ OpenClaw integration
+- ✅ Ollama integration
+- ✅ Telegram bot
+- ✅ Local development environment
+- ✅ VS Code workspace
+- ✅ Gateway repair
+- ✅ Prompt library
+
+### Next milestone (v0.2)
+
+- ClawIQ Core Skill
+- Vision support
+- Router
+- Memory
+  
 ## ✨ Vision
 
 Large Language Models are becoming more powerful every month.
