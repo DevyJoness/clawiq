@@ -1,0 +1,16 @@
+{
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+
+    "editor.formatOnSave": true,
+
+    "editor.minimap.enabled": true,
+
+    "editor.wordWrap": "on",
+
+    "git.enableSmartCommit": true,
+
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+
+    "markdown.preview.breaks": true
+}
