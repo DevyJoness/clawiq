@@ -1,5 +1,30 @@
 # ClawIQ Roadmap
 
+# Current Progress
+
+## Released
+
+- ✅ v0.1.0 Foundation Release
+
+## Current Sprint
+
+Sprint 2
+
+v0.2.0
+Core Skill
+Vision
+Router
+
+v0.3.0
+Memory
+Knowledge Base
+
+v0.4.0
+Automation
+
+v1.0.0
+Personal AI Operating System
+
 > Building a personal AI operating system.
 
 ---
