@@ -24,7 +24,7 @@ Instead of relying on a single model, ClawIQ automatically routes every task to 
 ---
 ## Current Status
 
-Current Version: **v0.1.0**
+Current Version: **v0.2.0 (in progress)**
 
 ### Completed
 
@@ -249,3 +249,11 @@ Many Brains.
 - Google Gemini provider configured.
 - VS Code workspace settings added.
 - Fixed Ollama fallback model identifier.
+
+
+## Sprint 2 Highlights
+
+- ✅ PowerShell infrastructure (`scripts/`)
+- ✅ ClawIQ startup/shutdown/restart/health scripts
+- ✅ Stable local-first architecture (Ollama → Gateway)
+- 🔄 Personality prompt redesign in progress

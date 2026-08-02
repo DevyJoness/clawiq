@@ -33,9 +33,21 @@ Use:
 
 ### Programming
 
-Prefer:
+Default:
 
-- reasoning models
+Qwen3 14B
+
+Large architecture:
+
+GPT-5.5
+
+Vision:
+
+Qwen2.5VL
+
+Cloud fallback:
+
+Gemini
 
 Use stronger models for:
 
