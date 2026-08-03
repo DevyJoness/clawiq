@@ -1,417 +1,128 @@
-# ClawIQ Setup Guide
+# SETUP
 
-This document describes the complete installation and configuration process for ClawIQ.
+_Last updated: 2026-08-03_
+
+# Purpose
+
+This document describes the recommended development environment for ClawIQ.
+
+The goal is to provide a reproducible local-first setup for contributors.
 
 ---
 
 # Requirements
 
+## Operating System
+
+Recommended:
+
 - Windows 11
-- Node.js (latest LTS recommended)
+
+Supported:
+
+- Windows 10
+- Linux (planned)
+- macOS (planned)
+
+---
+
+# Required Software
+
 - Git
+- Python 3.11+
 - Ollama
-- Telegram Bot Token
-- GitHub account
+- OpenClaw
+- VS Code
+- PowerShell 7 (recommended)
 
 ---
 
-# Repository
+# Local Models
 
-Clone the repository.
+Required:
 
-```bash
-git clone https://github.com/DevyJoness/clawiq.git
-```
+- Qwen3
+- Qwen2.5-VL
 
----
+Optional:
 
-# Install OpenClaw
-
-Install globally using npm.
-
-```powershell
-npm install -g openclaw
-```
-
-Verify installation.
-
-```powershell
-openclaw --version
-```
+- Additional Ollama-compatible models
 
 ---
 
-# Install Ollama
-
-Download and install Ollama.
-
-Verify:
-
-```powershell
-ollama --version
-```
-
----
-
-# Download Models
-
-Main model:
-
-```powershell
-ollama pull qwen3:14b
-```
-
-Vision model:
-
-```powershell
-ollama pull qwen2.5vl:7b
-```
-
-Verify:
-
-```powershell
-ollama list
-```
-
----
-
-# Configure OpenClaw
-
-Run:
-
-```powershell
-openclaw configure
-```
+# Environment
 
 Configure:
 
-- Workspace
-- Gateway
-- Telegram
-- Ollama
+- OpenAI API Key
+- Gemini API Key (optional)
+- Kimi API Key (optional)
+
+Local models should be preferred whenever possible.
 
 ---
 
-# Configure Telegram
+# Installation
 
-Create a bot using BotFather.
-
-Add the token inside OpenClaw configuration.
-
----
-
-# Configure Gateway
-
-Gateway should be configured as:
-
-- Mode: Local
-- Bind: Loopback
-- Port: 18789
-
-Verify:
-
-```powershell
-openclaw gateway status
-```
-
-Dashboard:
-
-```
-http://127.0.0.1:18789
-```
+1. Clone repository.
+2. Install Python dependencies.
+3. Install Ollama.
+4. Download required models.
+5. Configure environment variables.
+6. Start OpenClaw.
+7. Start ClawIQ Gateway.
+8. Verify Telegram interface.
 
 ---
 
-# Configure Models
+# Verification Checklist
 
-Run:
-
-```powershell
-openclaw configure --section model
-```
-
-Select:
-
-Primary model
-
-```
-ollama/qwen3:14b
-```
-
-Vision model
-
-```
-ollama/qwen2.5vl:7b
-```
-
-Verify:
-
-```powershell
-openclaw agents list
-```
-
-Expected:
-
-```
-Model:
-ollama/qwen3:14b
-```
+- Gateway starts successfully.
+- Ollama responds.
+- Local model is available.
+- Telegram bot connects.
+- Router selects providers correctly.
+- Logs contain no startup errors.
 
 ---
 
-# Gateway Autostart
+# Troubleshooting
 
-OpenClaw creates:
+Common issues:
 
-```
-~/.openclaw/gateway.cmd
+- Missing API keys.
+- Ollama not running.
+- Missing local model.
+- Incorrect environment variables.
+- Port already in use.
 
-~/.openclaw/gateway.vbs
-```
+Refer to:
 
-If automatic startup fails after installation or update:
-
-Run
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/repair-gateway.ps1
-```
-
-This repairs:
-
-- gateway.cmd
-- gateway.vbs
+- BUGS.md
+- MAINTENANCE.md
 
 ---
 
-# Known Windows Issue
+# Development Workflow
 
-OpenClaw currently generates launcher files using absolute paths.
-
-Windows usernames containing non-ASCII characters (for example Cyrillic usernames) may break:
-
-- gateway.cmd
-- gateway.vbs
-
-ClawIQ includes a repair script:
-
-```
-scripts/repair-gateway.ps1
-```
+1. Pull latest changes.
+2. Create feature branch.
+3. Implement changes.
+4. Test locally.
+5. Update documentation if architecture changed.
+6. Commit.
+7. Push.
+8. Create Pull Request.
 
 ---
 
-# Verify Gateway
+# Source of Truth
 
-Run:
+Architecture:
+- ARCHITECTURE.md
 
-```powershell
-openclaw gateway status
-```
+Current sprint:
+- PROJECT_CONTEXT.md
 
-Expected:
-
-```
-Runtime: running
-
-Connectivity probe: ok
-```
-
----
-
-# Verify Telegram
-
-Send a message to the bot.
-
-Expected:
-
-- reply received
-- no Model Fallback
-- provider = Ollama
-
----
-
-# Identity
-
-Workspace contains:
-
-```
-IDENTITY.md
-```
-
-OpenClaw reads identity from plain fields.
-
-Correct:
-
-```
-- Name: ClawIQ
-- Theme: Personal AI Operating System
-- Emoji: 🧠
-```
-
-Incorrect:
-
-```
-- **Name:** ClawIQ
-```
-
-Update identity:
-
-```powershell
-openclaw agents set-identity --agent main --workspace "$env:USERPROFILE\.openclaw\workspace" --from-identity
-```
-
----
-
-# GitHub Documentation
-
-Project documentation is stored in:
-
-```
-docs/
-
-README.md
-ARCHITECTURE.md
-ROADMAP.md
-SETUP.md
-BUGS.md
-MAINTENANCE.md
-```
-
-Prompt library:
-
-```
-docs/prompts/
-
-system-v1.md
-coding-v1.md
-vision-v1.md
-router-v1.md
-```
-
----
-
-# Maintenance
-
-Repair gateway:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/repair-gateway.ps1
-```
-
-Stop Ollama:
-
-```powershell
-taskkill /IM ollama.exe /F
-```
-
-Start Ollama:
-
-```powershell
-ollama serve
-```
-
-Loaded models:
-
-```powershell
-ollama ps
-```
-
-Installed models:
-
-```powershell
-ollama list
-```
-
----
-
-# Current Architecture
-
-```
-Telegram
-
-↓
-
-OpenClaw Gateway
-
-↓
-
-Agent (main / ClawIQ)
-
-↓
-
-Ollama
-
-↓
-
-Qwen3:14b
-
-↓
-
-Future Router
-
-↓
-
-Future Skills
-
-↓
-
-Future Memory
-```
-
----
-
-# Current Status
-
-Completed
-
-- GitHub repository
-- Documentation
-- Gateway
-- Telegram
-- Ollama
-- Qwen3
-- Vision model
-- Prompt library
-- Gateway repair script
-
-In Progress
-
-- Vision integration
-- Gemini integration
-- Agent identity
-- Router
-- Memory
-
-Planned
-
-- Web UI
-- Mobile application
-- Multi-agent system
-- ClawIQ Router
-- Cloud deployment
-
-
-## Default Routing
-Primary: ollama/qwen3:14b
-Fallbacks:
-1. google/gemini-3.1-pro-preview
-2. openai/gpt-5.5
-3. ollama/qwen2.5vl:7b
-Vision: ollama/qwen2.5vl:7b
-
-
----
-
-# Recommended Startup
-
-Instead of relying on the autogenerated OpenClaw launcher, use the project PowerShell scripts:
-
-```powershell
-./scripts/Start-ClawIQ.ps1
-./scripts/Stop-ClawIQ.ps1
-./scripts/Restart-ClawIQ.ps1
-./scripts/HealthCheck.ps1
-```
-
-This avoids Windows username encoding issues and provides a stable project-owned startup process.
+Long-term direction:
+- ROADMAP.md

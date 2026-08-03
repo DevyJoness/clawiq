@@ -1,278 +1,184 @@
-# ClawIQ Architecture
+# ARCHITECTURE
 
-> One AI. Many Brains.
-
----
+_Last updated: 2026-08-03_
 
 # Overview
 
-ClawIQ is designed as an AI orchestration platform rather than a single chatbot.
+ClawIQ is a modular, local-first AI platform.
 
-Instead of relying on one language model, ClawIQ coordinates multiple AI providers, local models, tools and memory through a single intelligent router.
-
-The user interacts with one assistant while ClawIQ decides which model and tools should solve the task.
+The system is designed so that interfaces, AI providers and tools are replaceable while the assistant's identity, memory and behaviour remain consistent.
 
 ---
 
-# High-Level Architecture
+# Core Architecture
 
-```mermaid
-flowchart TD
-
-    User["User"]
-
-    Telegram["Telegram"]
-    Desktop["Desktop App"]
-    Mobile["Mobile App"]
-    Web["Web"]
-
-    Gateway["OpenClaw Gateway"]
-
-    Router["Model Router"]
-
-    Memory["Shared Memory"]
-
-    GPT["OpenAI GPT"]
-    Gemini["Google Gemini"]
-    Qwen["Ollama Qwen"]
-    Kimi["Moonshot Kimi"]
-
-    GitHub["GitHub"]
-    Notion["Notion"]
-    Files["Local Files"]
-    Calendar["Calendar"]
-    Voice["Voice"]
-
-    User --> Telegram
-    User --> Desktop
-    User --> Mobile
-    User --> Web
-
-    Telegram --> Gateway
-    Desktop --> Gateway
-    Mobile --> Gateway
-    Web --> Gateway
-
-    Gateway --> Router
-
-    Router --> GPT
-    Router --> Gemini
-    Router --> Qwen
-    Router --> Kimi
-
-    Router --> Memory
-
-    Memory --> GitHub
-    Memory --> Notion
-    Memory --> Files
-    Memory --> Calendar
-    Memory --> Voice
+```text
+                    User
+                      │
+        ┌─────────────┴─────────────┐
+        │                           │
+ Telegram │ Desktop │ Mobile │ API │ Web
+        │
+        ▼
++-------------------------------+
+|         ClawIQ Gateway        |
++-------------------------------+
+               │
+               ▼
++-------------------------------+
+|        Intelligent Router     |
++-------------------------------+
+        │        │         │
+        ▼        ▼         ▼
+   Memory     Skills   AI Providers
+        │        │         │
+        ▼        ▼         ▼
+ Knowledge    Tools    Local / Cloud
 ```
 
 ---
 
-# Core Components
-
-## User Interfaces
-
-Current
-
-- Telegram
-
-Planned
-
-- Desktop
-- Android
-- iPhone
-- Web
-
----
+# Components
 
 ## Gateway
 
-Responsibilities:
+Responsibilities
 
-- Receive messages
-- Manage sessions
-- Handle channels
-- Route requests
-
-Technology:
-
-- OpenClaw Gateway
+- Entry point
+- Authentication
+- Session management
+- Request normalization
+- Interface abstraction
 
 ---
 
-## Model Router
+## Router
 
-The Router is the brain of ClawIQ.
+Responsibilities
 
-Responsibilities:
-
-- Select the best AI model
-- Manage fallbacks
-- Reduce costs
-- Optimize context usage
-
-Current routing:
-
-GPT → Qwen
-
-Future routing:
-
-GPT
-
-↓
-
-Gemini
-
-↓
-
-Kimi
-
-↓
-
-Qwen
+- Model selection
+- Cost optimisation
+- Local-first execution
+- Provider fallback
+- Context preparation
 
 ---
 
-## Shared Memory
+## Memory
 
-One memory shared across every interface.
+Responsibilities
 
-Responsibilities:
-
-- User preferences
-- Project memory
-- Long-term memory
 - Conversation history
+- User preferences
+- Long-term knowledge
+- Semantic retrieval
+- Shared context
 
-Future:
+Memory must be independent from any AI provider.
 
-Semantic search
+---
+
+## Skills
+
+Skills perform domain-specific work.
+
+Examples:
+
+- Coding
+- Vision
+- Research
+- GitHub
+- Jira
+- Notion
+- Calendar
+- Local Files
+
+Skills should remain modular.
 
 ---
 
 ## AI Providers
 
-### OpenAI
+### Local
 
-Primary reasoning model.
+- Ollama
+- Qwen3
+- Qwen2.5-VL
 
----
+### Cloud
 
-### Gemini
+- OpenAI
+- Gemini
+- Kimi
 
-Large context.
-
-Research.
-
-Documents.
-
----
-
-### Kimi
-
-Coding.
-
-Reasoning.
-
-Cost optimization.
+Providers must be interchangeable.
 
 ---
 
-### Ollama
-
-Offline inference.
-
-Privacy.
-
-Local execution.
-
----
-
-## Integrations
+## Interfaces
 
 Current
 
 - Telegram
-- GitHub
-- Notion
 
 Planned
 
-- Gmail
-- Calendar
-- Google Drive
-- Local Files
+- Windows
+- macOS
+- Linux
+- iPhone
+- Android
+- API
+- Web
+
+Interfaces must never contain business logic.
 
 ---
 
-# Long-Term Vision
+# Principles
 
-Future architecture
-
-```text
-User
-
-↓
-
-ClawIQ
-
-↓
-
-Router
-
-↓
-
-Multiple AI Providers
-
-↓
-
-Shared Memory
-
-↓
-
-External Tools
-
-↓
-
-Automations
-```
+1. Local-first.
+2. Shared memory.
+3. Provider independence.
+4. Modular skills.
+5. Stable personality.
+6. Production-ready solutions.
+7. Documentation accompanies architecture.
 
 ---
 
-# Design Principles
-
-- Modular
-- Provider agnostic
-- Local-first
-- Privacy-friendly
-- Extensible
-- Fault tolerant
-
----
-
-# Current Status
+# Current Architecture Status
 
 Implemented
 
 - Gateway
-- Telegram
-- GPT
+- OpenClaw integration
 - Ollama
-- Local fallback
+- Telegram
+- Basic routing
 
 In Progress
 
-- Gemini
+- Router v2
+- Memory foundation
+- Prompt architecture
+- Personality
 - Vision
-- Router
 
 Planned
 
-- Multi-agent system
-- Desktop application
-- Mobile applications
-- Voice
-- Memory
+- Desktop runtime
+- Mobile runtime
+- Skills platform
+- Semantic memory
+- Multi-agent orchestration
+
+---
+
+# Documentation
+
+Architecture decisions should remain synchronized with:
+
+- ROADMAP.md
+- PROJECT_CONTEXT.md
+- Jira (KAN)

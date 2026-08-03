@@ -1,130 +1,97 @@
-# ClawIQ Project Context
+# PROJECT_CONTEXT
 
-## Project
+_Last updated: 2026-08-03_
 
-Name: ClawIQ
+# Project
 
-Owner: Artem
-
-Repository: GitHub
-
-Planning: Jira
-
-Documentation: docs/
-
----
-
-## Mission
-
-Build a production-ready local-first personal AI platform.
-
----
-
-## Current Version
-
-v0.2.x
-
----
+**ClawIQ** is a local-first personal AI platform built on OpenClaw.
 
 ## Current Sprint
+**Sprint 3 — Intelligence**
 
-Sprint 3 — Intelligence
+Jira Epic: **KAN-7**
 
----
+### Objectives
+- Personality
+- Identity
+- Prompt Architecture
+- Memory Foundation
+- Router
+- Vision
+- Documentation
+- Testing & QA
+
+## Active Epics
+
+| Epic | Description |
+|------|-------------|
+| KAN-7 | Sprint 3 – Intelligence |
+| KAN-8 | Infrastructure |
+| KAN-9 | Desktop Application |
+| KAN-10 | Memory |
+| KAN-11 | Vision |
+| KAN-12 | Productivity Integrations |
+| KAN-13 | Testing & QA |
+| KAN-14 | Technical Debt |
+
+## Architecture Status
+
+### Stable
+- Gateway
+- OpenClaw
+- Ollama
+- Telegram interface
+
+### In Progress
+- Router
+- Memory
+- Personality
+- Vision
+- Desktop foundation
+
+### Planned
+- Native Desktop
+- Native Mobile
+- Skills Platform
+- Semantic Memory
+- Multi-Agent
+
+## Source of Truth
+
+- Jira — active work
+- ROADMAP.md — long-term strategy
+- ARCHITECTURE.md — architecture
+- CHANGELOG.md — history
+- BUGS.md — known issues
+
+## Rules
+
+1. Roadmap defines direction.
+2. Jira defines execution.
+3. GitHub stores code.
+4. Documentation is updated with architecture.
+5. Prefer local-first.
+6. Prefer production-ready solutions.
 
 ## Current Priorities
 
+P0:
+- Router
+- Memory
 - Personality
-- Prompt System
-- Stable Infrastructure
-- Local-first Routing
-- Memory Foundation
-- Desktop Architecture
+- Prompt Architecture
+- Documentation
 
----
+P1:
+- Desktop
+- Vision
+- Infrastructure
 
-## Long-term Vision
+P2:
+- Productivity
+- Semantic Search
+- Cost Optimization
 
-ClawIQ should evolve from a Telegram bot into a standalone application.
+## Goal
 
-Target platforms:
-
-- Windows
-- macOS
-- Linux
-- iPhone
-- Android
-
-Telegram should become only one of the available interfaces.
-
----
-
-## Core Principles
-
-- Local First
-- Production Ready
-- Clean Architecture
-- Maintainability
-- Documentation First
-- Reliability over Complexity
-
----
-
-## Primary Runtime
-
-OpenClaw
-
----
-
-## Primary Local Models
-
-- Qwen3 14B
-- Qwen2.5VL
-
----
-
-## Cloud Models
-
-Used only when local models cannot reliably complete the task.
-
----
-
-## Planning
-
-Roadmap defines long-term goals.
-
-Jira tracks active development.
-
-GitHub stores code, releases and documentation.
-
----
-
-## Development Workflow
-
-Roadmap
-
-↓
-
-Jira Sprint
-
-↓
-
-GitHub Commit
-
-↓
-
-GitHub Release
-
-↓
-
-Update Documentation
-
-↓
-
-Update PROJECT_CONTEXT
-
----
-
-## Current Goal
-
-Build the first stable version of ClawIQ capable of becoming a full personal AI platform.
+Build a production-ready cross-platform personal AI platform.

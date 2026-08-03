@@ -1,161 +1,111 @@
-# ClawIQ Bug Tracker
+# BUGS
 
-This document contains all known issues discovered during development.
+_Last updated: 2026-08-03_
+
+# Purpose
+
+Track confirmed reproducible issues affecting ClawIQ.
+
+Only verified bugs should be added.
 
 ---
 
-# BUG-001
+# Open
 
-Status: ✅ Fixed
+## BUG-001
 
 Title:
+Vision model instability
 
-Gateway startup script failed.
+Status:
+Open
+
+Priority:
+High
 
 Description:
+Vision pipeline is not yet considered production-ready and requires additional validation before being enabled by default.
 
-Gateway did not start correctly after installation.
+Workaround:
+Disable vision routing for unsupported configurations.
 
-Resolution:
-
-Gateway service configuration was corrected.
+Related Epic:
+KAN-11
 
 ---
 
-# BUG-002
-
-Status: ✅ Fixed
+## BUG-002
 
 Title:
+Router fallback validation
 
-Telegram Gateway communication.
+Status:
+Open
+
+Priority:
+High
 
 Description:
+Router fallback scenarios require broader automated testing to ensure consistent provider selection.
 
-Telegram messages were not delivered correctly.
-
-Resolution:
-
-Gateway configuration updated.
+Related Epic:
+KAN-7
 
 ---
 
-# BUG-003
-
-Status: 🔄 Investigating
+## BUG-003
 
 Title:
+Memory persistence
 
-Windows Companion authentication
+Status:
+Planned Investigation
+
+Priority:
+Medium
 
 Description:
+Long-term memory implementation is still under active development and requires validation after persistence layer is completed.
 
-The Companion application detects the local Gateway but fails with:
-
-"No credential available"
-
-Current status:
-
-Gateway works correctly.
-
-Problem appears to be related to authentication.
+Related Epic:
+KAN-10
 
 ---
 
-# BUG-004
+# Closed
 
-Status: 🔴 Open
-
-Title:
-
-Vision model crashes on AMD GPU
-
-Description:
-
-Qwen2.5VL crashes during image processing.
-
-Error:
-
-ROCm error:
-device kernel image is invalid
-
-Current status:
-
-Image pipeline works.
-
-OpenClaw works.
-
-Ollama launches.
-
-Crash occurs inside llama-server.
+Use CHANGELOG.md to reference resolved issues.
 
 ---
 
-# BUG-005
+# Reporting Rules
 
-Status: 🔴 Open
+Every bug should contain:
 
-Title:
-
-Gemini OAuth authentication
-
-Description:
-
-Gemini CLI authentication completes in browser.
-
-CLI returns:
-
-"This client is no longer supported..."
-
-Current status:
-
-Likely caused by migration to Google's new authentication flow.
+- ID
+- Title
+- Description
+- Reproduction steps
+- Expected behaviour
+- Actual behaviour
+- Severity
+- Status
+- Related Jira issue
 
 ---
 
-## BUG-006
+# Status Values
 
-### Title
+- Open
+- In Progress
+- Fixed
+- Verified
+- Closed
 
-Gateway launcher fails on Windows with non-ASCII usernames.
+---
 
-### Status
+# Related Documents
 
-Workaround implemented.
-
-### Symptoms
-
-- Windows Script Host error
-- gateway.vbs cannot locate gateway.cmd
-- automatic startup fails
-
-### Cause
-
-OpenClaw generates launcher scripts using absolute paths that become corrupted when the Windows username contains non-ASCII characters.
-
-### Workaround
-
-Run:
-
-scripts/repair-gateway.ps1
-
-### Upstream
-
-Should be reported to OpenClaw.
-
-# Bug Status Legend
-
-✅ Fixed
-
-🔄 Investigating
-
-🔴 Open
-
-🟡 Monitoring
-
-
-## BUG-006 Gemini API
-429 RESOURCE_EXHAUSTED while using Gemini API key.
-
-## BUG-007 OpenAI OAuth
-Codex/OpenAI usage limit reached during fallback tests.
+- CHANGELOG.md
+- PROJECT_CONTEXT.md
+- ARCHITECTURE.md
