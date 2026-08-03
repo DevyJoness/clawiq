@@ -1,259 +1,152 @@
 # ClawIQ
-> 🚀 Current stable release: **v0.1.1 – Multi-Provider Failover**
 
-ClawIQ is currently in active development.
-![Version](https://img.shields.io/badge/version-v0.1.1-blue)
-
-![Status](https://img.shields.io/badge/status-active-success)
-
-![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-lightgrey)
-
-![License](https://img.shields.io/badge/license-Apache--2.0-green)
-
-![Ollama](https://img.shields.io/badge/Ollama-Enabled-black)
-
-![OpenAI](https://img.shields.io/badge/OpenAI-Connected-74aa9c)
-
-![Telegram](https://img.shields.io/badge/Telegram-Enabled-2CA5E0)
 > **One AI. Many Brains.**
 
-ClawIQ is an AI orchestration platform that combines multiple language models, local AI, cloud AI, tools and memory into one intelligent assistant.
-
-Instead of relying on a single model, ClawIQ automatically routes every task to the most suitable AI while preserving one shared experience across all interfaces.
+ClawIQ is a local-first personal AI platform built on OpenClaw. Its long-term goal is to become a cross-platform AI operating system that provides a consistent personality, shared memory, and intelligent routing across local and cloud models.
 
 ---
+
+## Vision
+
+ClawIQ is **not** a Telegram bot.
+
+Telegram is currently the primary interface, but the product is designed to evolve into native applications for:
+
+- Windows
+- macOS
+- Linux
+- iPhone
+- Android
+
+The assistant should remain the same regardless of interface or model.
+
+---
+
 ## Current Status
 
-Current Version: **v0.2.0 (in progress)**
+**Development Stage:** Sprint 3 – Intelligence
 
-### Completed
+Current focus:
 
-- ✅ Project architecture
-- ✅ Documentation
-- ✅ OpenClaw integration
-- ✅ Ollama integration
-- ✅ Telegram bot
-- ✅ Local development environment
-- ✅ VS Code workspace
-- ✅ Gateway repair
-- ✅ Prompt library
+- Personality & Identity
+- Prompt Architecture
+- Model Router
+- Memory Foundation
+- Vision Pipeline
+- Documentation Alignment
+- Testing & QA
 
-### Next milestone (v0.2)
-
-- ClawIQ Core Skill
-- Vision support
-- Router
-- Memory
-  
-## ✨ Vision
-
-Large Language Models are becoming more powerful every month.
-
-Today it's GPT.
-
-Tomorrow it's Gemini.
-
-Next month it might be Kimi or something entirely new.
-
-ClawIQ is not trying to build another language model.
-
-ClawIQ builds the operating system around them.
-
-The goal is simple:
-
-> One assistant.
->
-> Multiple AI providers.
->
-> One memory.
->
-> One workflow.
+Jira is the source of truth for active work.
+ROADMAP.md defines long-term direction.
 
 ---
 
-## 🚀 Current Features
+## Core Principles
 
-- 🤖 Multi-model AI architecture
-- 🧠 Automatic model fallback
-- 💻 Local LLM support (Ollama)
-- ☁️ Cloud model support
-- 📱 Telegram interface
-- 🔄 Gateway service
-- 🧩 Modular architecture
-- 🛠 Extensible tool system
+- Local-first
+- Model-agnostic
+- Production-ready
+- Shared memory
+- Modular architecture
+- Replace models, not the assistant
 
 ---
 
-## 🧠 Current AI Stack
+## High-Level Architecture
 
-| Model | Purpose | Status |
-|--------|----------|--------|
-| GPT-5.5 | Primary reasoning | ✅ |
-| Qwen3 14B | Local fallback | ✅ |
-| Qwen2.5-VL | Vision | 🚧 |
-| Gemini | Research & documents | 🚧 |
-| Kimi | Coding | 🚧 |
-
----
-
-## 🏗 Architecture
-
-```
-                    ClawIQ
-
-              AI Orchestrator
-
-        ┌──────────┼──────────┐
-
-        ▼          ▼          ▼
-
-      GPT       Gemini      Qwen
-
-        ▼          ▼          ▼
-
- GitHub      Notion     Telegram
-
-        ▼          ▼          ▼
-
-          Shared Memory
+```text
+User
+ │
+ ▼
+Interfaces
+ │
+ ▼
+Gateway
+ │
+ ▼
+Router
+ ├── Local Models
+ ├── Cloud Models
+ ├── Skills
+ ├── Memory
+ └── Tools
 ```
 
 ---
 
-## 🎯 Project Goals
+## Current AI Stack
 
-- Build one assistant that can use multiple AI models
-- Keep a shared memory across every interface
-- Support local and cloud inference
-- Route tasks automatically to the best model
-- Provide desktop, mobile and web interfaces
-- Become model-agnostic
+### Local
 
----
+- Ollama
+- Qwen3
+- Qwen2.5-VL
 
-## 📦 Current Tech Stack
-
-### AI
+### Cloud
 
 - OpenAI
-- Ollama
-- Qwen
-- Gemini (planned)
-- Kimi (planned)
-
-### Infrastructure
-
-- OpenClaw
-- Node.js
-- Telegram
-- GitHub
-- Notion
-
----
-
-## 🛣 Roadmap
-
-### Phase 1 — Foundation
-
-- Gateway
-- Telegram
-- Ollama
-- GPT
-- Fallback
-
-### Phase 2 — Intelligence
-
-- Router
 - Gemini
 - Kimi
-- Vision
-- Memory
-
-### Phase 3 — Productivity
-
-- GitHub integration
-- Notion integration
-- Calendar
-- Email
-- Voice
-
-### Phase 4 — Interfaces
-
-- Desktop App
-- Android
-- iOS
-- Web
 
 ---
 
-## 📈 Project Status
+## Repository Structure
 
-Current version:
-
-**v0.1.0-alpha**
-
-Current state:
-
-- Gateway ✔
-- Telegram ✔
-- GPT ✔
-- Local LLM ✔
-- Fallback ✔
-
-In Progress:
-
-- Gemini
-- Vision
-- Router
+```text
+docs/
+prompts/
+scripts/
+workspace/
+```
 
 ---
 
-## 🤝 Contributing
+## Development Workflow
 
-The project is currently in active development.
+Idea
 
-Ideas, bug reports and discussions are always welcome.
+↓
+
+ROADMAP
+
+↓
+
+Jira Epic
+
+↓
+
+Story
+
+↓
+
+Task
+
+↓
+
+GitHub
+
+↓
+
+Release
+
+↓
+
+Documentation
 
 ---
 
-## 📜 License
+## Documentation
 
-Apache-2.0
+- PROJECT_CONTEXT.md
+- ROADMAP.md
+- ARCHITECTURE.md
+- SETUP.md
+- MAINTENANCE.md
+- BUGS.md
+- CHANGELOG.md
 
 ---
 
-## ❤️ Philosophy
+## License
 
-ClawIQ is built around one simple belief:
-
-Artificial Intelligence should feel like **one assistant**, not ten different chatbots.
-
-No matter which model solves the task,
-the experience should stay consistent.
-
-One AI.
-
-Many Brains.
-
-
-## AI Stack
-
-- Primary: Ollama Qwen3:14B
-- Cloud fallback: Google Gemini 3.1 Pro Preview
-- Secondary fallback: OpenAI GPT-5.5
-- Vision: Ollama Qwen2.5VL
-
-## What's new in v0.1.1
-
-- Multi-provider failover verified.
-- Google Gemini provider configured.
-- VS Code workspace settings added.
-- Fixed Ollama fallback model identifier.
-
-
-## Sprint 2 Highlights
-
-- ✅ PowerShell infrastructure (`scripts/`)
-- ✅ ClawIQ startup/shutdown/restart/health scripts
-- ✅ Stable local-first architecture (Ollama → Gateway)
-- 🔄 Personality prompt redesign in progress
+Private project.
