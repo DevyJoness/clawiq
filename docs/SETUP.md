@@ -84,6 +84,12 @@ Local models should be preferred whenever possible.
 - Router selects providers correctly.
 - Logs contain no startup errors.
 
+## Jira QA automation (optional)
+
+The local Jira QA webhook is an isolated automation service. It receives a signed Jira Automation event through a Cloudflare Tunnel, reads the current issue through Jira REST API, and posts an evidence-based QA Checklist and Regression/Smoke Test through the local Ollama model. It does not use Rovo or alter Jira issue fields/statuses.
+
+Follow [JIRA_QA_WEBHOOK.md](JIRA_QA_WEBHOOK.md) for protected environment variables, tunnel configuration, Jira Automation setup, and safe test verification. Keep any existing hourly QA automation enabled until the event-driven flow has been verified.
+
 ---
 
 # Troubleshooting

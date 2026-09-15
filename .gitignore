@@ -1,0 +1,4 @@
+# Local secrets for Jira QA automation
+automation/jira_qa/.env
+__pycache__/
+*.py[cod]

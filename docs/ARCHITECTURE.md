@@ -95,6 +95,10 @@ Examples:
 
 Skills should remain modular.
 
+### Jira QA webhook
+
+The Jira QA webhook is a local automation adapter, not a Gateway replacement. Jira Automation reaches it through a narrowly scoped HTTPS tunnel; the adapter validates a shared secret, fetches current Jira evidence, invokes the local QA model, and writes only two idempotent QA comments. It remains isolated from Telegram, Gateway sessions, and scheduled automation. See [JIRA_QA_WEBHOOK.md](JIRA_QA_WEBHOOK.md).
+
 ---
 
 ## AI Providers

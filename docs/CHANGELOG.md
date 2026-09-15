@@ -6,6 +6,27 @@ The format follows the Keep a Changelog convention.
 
 ---
 
+# [0.3.0] - 2026-09-15
+
+## Added
+
+- Local, loopback-only Jira QA webhook with constant-time secret validation.
+- Jira Cloud REST integration for current issue details, acceptance criteria, linked issues, and duplicate-comment detection.
+- Local Ollama QA workflow that creates separate evidence-based QA Checklist and Regression/Smoke Test comments.
+- Idempotent queued processing, structured error logging, and automated webhook/workflow tests.
+- Cloudflare Tunnel and Jira Automation setup documentation without Rovo.
+
+## Security
+
+- Jira and webhook secrets are loaded from an ignored local environment file and are never committed.
+- The service does not modify issue status or other Jira fields.
+
+## Compatibility
+
+- Existing Gateway, Telegram, and hourly automation are unchanged.
+
+---
+
 # [Unreleased]
 
 ## Planned
