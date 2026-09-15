@@ -26,6 +26,8 @@ The assistant should remain the same regardless of interface or model.
 
 **Development Stage:** Sprint 3 – Intelligence
 
+**Latest release:** [v0.3.0 — Local Jira QA Automation](https://github.com/DevyJoness/clawiq/releases/tag/v0.3.0)
+
 Current focus:
 
 - Personality & Identity
@@ -35,6 +37,8 @@ Current focus:
 - Vision Pipeline
 - Documentation Alignment
 - Testing & QA
+
+The v0.3.0 local Jira QA adapter is released. It remains disabled until a stable tunnel/network path is available; for now, QA artifacts are created on demand from a Jira issue key or link.
 
 Jira is the source of truth for active work.
 ROADMAP.md defines long-term direction.
@@ -96,7 +100,8 @@ Router
 docs/
 prompts/
 scripts/
-workspace/
+automation/
+tests/
 ```
 
 ---
@@ -144,6 +149,7 @@ Documentation
 - MAINTENANCE.md
 - BUGS.md
 - CHANGELOG.md
+- JIRA_QA_WEBHOOK.md
 
 ---
 

@@ -1,6 +1,6 @@
 # ROADMAP
 
-_Last updated: 2026-08-03_
+_Last updated: 2026-09-15_
 
 # Vision
 
@@ -85,7 +85,7 @@ Related Epics
 ## Integrations
 
 - GitHub
-- Jira
+- Jira — local QA adapter released in v0.3.0; event-driven deployment pending secure tunnel connectivity
 - Notion
 - Calendar
 - Gmail
@@ -96,6 +96,10 @@ Goals
 - Daily workflow automation
 - Project awareness
 - Long-term memory
+
+### Shipped increment: Jira QA automation
+
+v0.3.0 provides a local-first Jira QA adapter that reads current issue evidence and produces separate QA Checklist and Regression/Smoke Test comments via local Ollama. It is intentionally dormant until a reliable tunnel is available. In the interim, the supported workflow is on-demand QA by Jira issue key or link.
 
 ---
 

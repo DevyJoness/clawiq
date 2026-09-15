@@ -1,6 +1,6 @@
 # MAINTENANCE
 
-_Last updated: 2026-08-03_
+_Last updated: 2026-09-15_
 
 # Purpose
 
@@ -25,6 +25,19 @@ This document describes routine maintenance procedures for the ClawIQ developmen
 - Review Jira sprint progress.
 - Remove obsolete branches.
 - Verify documentation consistency.
+
+## Jira QA adapter
+
+The local Jira QA adapter was released in v0.3.0 but is not currently deployed through a public tunnel. Do not start or expose it as part of normal maintenance until secure outbound tunnel connectivity has been verified.
+
+Current supported workflow: create QA Checklist and Regression/Smoke Test artifacts on demand from a Jira issue key or link. Existing hourly automation remains unchanged.
+
+When deployment resumes:
+
+1. Verify `cloudflared` can reach Cloudflare over TCP or UDP port 7844.
+2. Use only a loopback-bound webhook with a protected secret.
+3. Test with a dedicated non-production Jira issue before enabling the Jira Automation rule.
+4. Keep the hourly automation enabled until the event-driven flow is proven stable.
 
 ---
 
@@ -74,6 +87,7 @@ Monitor for:
 - Timeout exceptions
 - Memory errors
 - Router failures
+- Jira QA webhook authentication, Jira REST, or Ollama errors when the adapter is explicitly deployed
 
 ---
 

@@ -1,6 +1,6 @@
 # ARCHITECTURE
 
-_Last updated: 2026-08-03_
+_Last updated: 2026-09-15_
 
 # Overview
 

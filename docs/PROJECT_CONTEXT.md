@@ -1,10 +1,25 @@
 # PROJECT_CONTEXT
 
-_Last updated: 2026-08-03_
+_Last updated: 2026-09-15_
 
 # Project
 
 **ClawIQ** is a local-first personal AI platform built on OpenClaw.
+
+## Latest Release
+
+**v0.3.0 — Local Jira QA Automation**
+
+Released: 2026-09-15
+
+- Adds an isolated, local Jira QA adapter using Jira REST API and local Ollama.
+- Produces an evidence-based QA Checklist and Regression/Smoke Test as separate Jira comments.
+- Does not use Rovo and does not alter issue statuses or other fields.
+- Requires a secure outbound tunnel before event-driven Jira Automation is enabled.
+
+### Current operating mode
+
+The event-driven webhook is released but intentionally not enabled because the current network blocks Cloudflare Tunnel connectivity. Until that is resolved, Jira QA is performed manually on request using an issue key or Jira link. Existing hourly automation remains unchanged.
 
 ## Current Sprint
 **Sprint 3 — Intelligence**
@@ -41,6 +56,7 @@ Jira Epic: **KAN-7**
 - OpenClaw
 - Ollama
 - Telegram interface
+- Local Jira QA adapter (released; deployment pending)
 
 ### In Progress
 - Router

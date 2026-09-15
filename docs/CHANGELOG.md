@@ -108,8 +108,11 @@ The format follows the Keep a Changelog convention.
 
 # Versioning
 
+Latest Release:
+0.3.0
+
 Current Development:
-0.2.0
+0.3.x
 
 Current Sprint:
 Sprint 3 — Intelligence

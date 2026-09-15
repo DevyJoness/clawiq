@@ -2,6 +2,8 @@
 
 _Added: 2026-09-15_
 
+> **Deployment status:** Released in v0.3.0. Event-driven Jira Automation is not currently enabled because the local network blocks Cloudflare Tunnel connectivity. Use the on-demand QA workflow with a Jira issue key or link until secure tunnel connectivity is available. Do not disable the existing hourly automation.
+
 ## Purpose and boundaries
 
 This integration adds an isolated local automation entry point for a Jira issue that enters **«В процессе проверки»**. It creates two separate Jira comments: **QA Checklist** and **Regression/Smoke Test**.
