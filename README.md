@@ -1,152 +1,44 @@
 # ClawIQ
 
-> **One AI. Many Brains.**
+Личный local-first AI-ассистент Артёма. Один ассистент, сохраняемый контекст и выбор подходящего маршрута под запрос. Основной интерфейс — самостоятельное desktop-приложение; Telegram больше не является интерфейсом текущего ClawIQ.
 
-ClawIQ is a local-first personal AI platform built on OpenClaw. Its long-term goal is to become a cross-platform AI operating system that provides a consistent personality, shared memory, and intelligent routing across local and cloud models.
+## Текущий релиз
 
----
+**v0.4.0 — Desktop Foundation**, Windows local preview. Реализованы чат с локальной Ollama, маршрутизация текста/кода/анализа/изображений, история отдельных разговоров и безопасный Electron renderer. Это начальная платформа, не законченная AI OS.
 
-## Vision
+Текст: qwen3:14b. Изображения PNG/JPEG: qwen2.5vl:7b. При наличии qwen2.5-coder:14b код направляется туда, иначе в Qwen3. Облачные запросы, веб-поиск и действия через инструменты в этом релизе отключены. Отсутствие модели сообщает ошибку, а не запускает облачный fallback.
 
-ClawIQ is **not** a Telegram bot.
+## Быстрый запуск
 
-Telegram is currently the primary interface, but the product is designed to evolve into native applications for:
+Windows, Node.js 24, Ollama. Python 3.11+ нужен для старого Jira QA adapter и его тестов, не для desktop-чата.
 
-- Windows
-- macOS
-- Linux
-- iPhone
-- Android
-
-The assistant should remain the same regardless of interface or model.
-
----
-
-## Current Status
-
-**Development Stage:** Sprint 3 – Intelligence
-
-Current focus:
-
-- Personality & Identity
-- Prompt Architecture
-- Model Router
-- Memory Foundation
-- Vision Pipeline
-- Documentation Alignment
-- Testing & QA
-
-Jira is the source of truth for active work.
-ROADMAP.md defines long-term direction.
-
----
-
-## Core Principles
-
-- Local-first
-- Model-agnostic
-- Production-ready
-- Shared memory
-- Modular architecture
-- Replace models, not the assistant
-
----
-
-## High-Level Architecture
-
-```text
-User
- │
- ▼
-Interfaces
- │
- ▼
-Gateway
- │
- ▼
-Router
- ├── Local Models
- ├── Cloud Models
- ├── Skills
- ├── Memory
- └── Tools
+```powershell
+ollama pull qwen3:14b
+ollama pull qwen2.5vl:7b
+npm.cmd ci
+npm.cmd start
 ```
 
----
+Собранный portable preview: dist/clawiq/win-unpacked/ClawIQ.exe. Переносите всю папку win-unpacked. Модели и Ollama устанавливаются отдельно.
 
-## Current AI Stack
+## Люська
 
-### Local
+[Люська](https://github.com/DevyJoness/lucy) — самостоятельный первый продукт, выросший из ClawIQ. У неё собственный Telegram-бот, игровая база, расписания и репозиторий. ClawIQ не читает игровые данные, не запускает её bot process и не использует её личность. Подробности: [границы продуктов](docs/PRODUCTS.md).
 
-- Ollama
-- Qwen3
-- Qwen2.5-VL
+## Архитектура и следующий шаг
 
-### Cloud
+Desktop → узкий IPC → core (routing + sessions) → local Ollama. OpenClaw остаётся выбранным runtime для будущих skills/actions. Его старый Gateway не запускается desktop-приложением; подключение выделенного personal agent с permissions — следующий milestone. Не подменяйте отсутствующий tool API прямым доступом renderer к файлам.
 
-- OpenAI
-- Gemini
-- Kimi
+## Документация
 
----
+- [Состояние проекта](docs/PROJECT_CONTEXT.md)
+- [Roadmap](docs/ROADMAP.md)
+- [Архитектура](docs/ARCHITECTURE.md)
+- [Desktop](docs/DESKTOP.md)
+- [Установка](docs/SETUP.md)
+- [Тестирование](docs/TESTING.md)
+- [Планирование](docs/BACKLOG.md)
+- [Изменения](docs/CHANGELOG.md)
+- [ADR](docs/ADR/README.md)
 
-## Repository Structure
-
-```text
-docs/
-prompts/
-scripts/
-workspace/
-```
-
----
-
-## Development Workflow
-
-Idea
-
-↓
-
-ROADMAP
-
-↓
-
-Jira Epic
-
-↓
-
-Story
-
-↓
-
-Task
-
-↓
-
-GitHub
-
-↓
-
-Release
-
-↓
-
-Documentation
-
----
-
-## Documentation
-
-- PROJECT_CONTEXT.md
-- ROADMAP.md
-- ARCHITECTURE.md
-- SETUP.md
-- MAINTENANCE.md
-- BUGS.md
-- CHANGELOG.md
-
----
-
-## License
-
-Private project.
+Jira KAN — источник актуальных задач, GitHub — кода и релизов. Старые документы сохранены в docs/archive/pre-desktop-reset только для истории. Проект private.

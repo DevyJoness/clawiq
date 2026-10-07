@@ -1,184 +1,44 @@
-# ARCHITECTURE
+# Архитектура ClawIQ
 
-_Last updated: 2026-08-03_
+Обновлено: 2026-10-07. Current и target разделены намеренно.
 
-# Overview
-
-ClawIQ is a modular, local-first AI platform.
-
-The system is designed so that interfaces, AI providers and tools are replaceable while the assistant's identity, memory and behaviour remain consistent.
-
----
-
-# Core Architecture
+## Current v0.4.0
 
 ```text
-                    User
-                      │
-        ┌─────────────┴─────────────┐
-        │                           │
- Telegram │ Desktop │ Mobile │ API │ Web
-        │
-        ▼
-+-------------------------------+
-|         ClawIQ Gateway        |
-+-------------------------------+
-               │
-               ▼
-+-------------------------------+
-|        Intelligent Router     |
-+-------------------------------+
-        │        │         │
-        ▼        ▼         ▼
-   Memory     Skills   AI Providers
-        │        │         │
-        ▼        ▼         ▼
- Knowledge    Tools    Local / Cloud
+Electron renderer (file assets, no network/Node)
+          ↓ narrow validated IPC
+Electron main (native image picker, lifecycle)
+          ↓
+core/assistant.mjs
+  ├─ router.mjs → task + local model + explanation
+  ├─ store.mjs → isolated conversation JSON
+  └─ loopback Ollama HTTP → qwen3 / coder / qwen2.5vl
 ```
 
----
+Renderer не содержит токенов, не читает файлы и не выбирает backend URL. Main проверяет sender и mainFrame, лимитирует изображение 10 МБ и проверяет PNG/JPEG signature. Routing не вызывает LLM для классификации: это проверяемые эвристики MVP. Reason и selected model возвращаются вместе с ответом.
 
-# Components
+History: OS userData/sessions, атомарная запись JSON через rename, random conversation ID. До 20 завершённых предыдущих messages передаются модели. Незавершённые/ошибочные запросы видны, но исключаются из следующего контекста. Никаких файлов/данных Люськи.
 
-## Gateway
+## Target
 
-Responsibilities
+```text
+Windows / macOS / Linux / future mobile
+               ↓ shared application contract
+identity + scoped sessions + permissions + routing
+               ↓
+OpenClaw personal agent / provider adapters / skills
+               ↓
+local models + explicitly enabled cloud + approved tools
+```
 
-- Entry point
-- Authentication
-- Session management
-- Request normalization
-- Interface abstraction
+Существующий OpenClaw сохраняется как выбранный tool/agent runtime. Его HTTP agent endpoint — operator credential boundary; он не должен быть доступен renderer или public network. Перед подключением нужен dedicated personal agent, local-first policy, action approvals и тесты permissions. Текущий user config может иметь cloud-first default и fallback; v0.4.0 его не использует и не переписывает.
 
----
+## Отдельные системы
 
-## Router
+- Люська в отдельном репозитории/runtime; personal memory не передаётся в группы.
+- automation/jira_qa — legacy isolated service, не часть desktop process. Webhook deployment отключён; очередь только in-memory, до production нужны durable jobs и evidence-version idempotency.
+- scripts/Start-ClawIQ.ps1 управляет legacy OpenClaw инфраструктурой, не запускает новый UI. Для UI — Start-ClawIQDesktop.ps1.
 
-Responsibilities
+## Extension rules
 
-- Model selection
-- Cost optimisation
-- Local-first execution
-- Provider fallback
-- Context preparation
-
----
-
-## Memory
-
-Responsibilities
-
-- Conversation history
-- User preferences
-- Long-term knowledge
-- Semantic retrieval
-- Shared context
-
-Memory must be independent from any AI provider.
-
----
-
-## Skills
-
-Skills perform domain-specific work.
-
-Examples:
-
-- Coding
-- Vision
-- Research
-- GitHub
-- Jira
-- Notion
-- Calendar
-- Local Files
-
-Skills should remain modular.
-
----
-
-## AI Providers
-
-### Local
-
-- Ollama
-- Qwen3
-- Qwen2.5-VL
-
-### Cloud
-
-- OpenAI
-- Gemini
-- Kimi
-
-Providers must be interchangeable.
-
----
-
-## Interfaces
-
-Current
-
-- Telegram
-
-Planned
-
-- Windows
-- macOS
-- Linux
-- iPhone
-- Android
-- API
-- Web
-
-Interfaces must never contain business logic.
-
----
-
-# Principles
-
-1. Local-first.
-2. Shared memory.
-3. Provider independence.
-4. Modular skills.
-5. Stable personality.
-6. Production-ready solutions.
-7. Documentation accompanies architecture.
-
----
-
-# Current Architecture Status
-
-Implemented
-
-- Gateway
-- OpenClaw integration
-- Ollama
-- Telegram
-- Basic routing
-
-In Progress
-
-- Router v2
-- Memory foundation
-- Prompt architecture
-- Personality
-- Vision
-
-Planned
-
-- Desktop runtime
-- Mobile runtime
-- Skills platform
-- Semantic memory
-- Multi-agent orchestration
-
----
-
-# Documentation
-
-Architecture decisions should remain synchronized with:
-
-- ROADMAP.md
-- PROJECT_CONTEXT.md
-- Jira (KAN)
+Интерфейсы используют contract, не бизнес-логику. Cloud fallback требует явной policy и выбора credentials. Tool action не считается выполненным до подтверждённого результата. Новые providers/skills должны иметь capability, timeout, cancellation, observability и test coverage. Shared memory означает общую модель данных с access scopes, не один публичный общий transcript.

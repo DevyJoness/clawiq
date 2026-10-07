@@ -1,128 +1,40 @@
-# SETUP
+# Setup
 
-_Last updated: 2026-08-03_
+Обновлено: 2026-10-07.
 
-# Purpose
+## Desktop
 
-This document describes the recommended development environment for ClawIQ.
+Windows, Node.js 24, npm, Ollama. Проверенные локальные модели: qwen3:14b и qwen2.5vl:7b. Требования RAM/VRAM зависят от размера/quantization модели; не объявляем поддержку неизвестного hardware без smoke.
 
-The goal is to provide a reproducible local-first setup for contributors.
+```powershell
+git clone https://github.com/DevyJoness/clawiq.git
+cd clawiq
+npm.cmd ci
+ollama pull qwen3:14b
+ollama pull qwen2.5vl:7b
+npm.cmd start
+```
 
----
+Убедитесь, что Ollama слушает 127.0.0.1:11434 и ollama list показывает нужные модели. Если она не запущена — запустите приложение Ollama или ollama serve; не запускайте второй serve на занятом порту. Никакой OpenAI API key для текущего desktop не требуется.
 
-# Requirements
+UI launcher: scripts/Start-ClawIQDesktop.ps1. Portable release не требует установленного Node, но требует Ollama и моделей.
 
-## Operating System
+## Legacy OpenClaw
 
-Recommended:
+OpenClaw остаётся integration target для skills/actions; сейчас desktop его не запускает. Legacy Start-ClawIQ.ps1 ожидает Node в Program Files, глобальный npm OpenClaw и пользовательскую Ollama installation. Эти scripts не являются переносимым production installer. Не используйте legacy Telegram channel с Lucy token.
 
-- Windows 11
+## Jira QA
 
-Supported:
+Python 3.11+, отдельный ignored .env, установка не нужна для стандартной библиотеки. Пример .env содержит placeholders, не доказательство действующих credentials. См. JIRA_QA_WEBHOOK.md. Adapter не включён по умолчанию. Cloud tunnel и permissions проверяются отдельно перед deployment.
 
-- Windows 10
-- Linux (planned)
-- macOS (planned)
+## Тестирование
 
----
+```powershell
+npm.cmd test
+python -m unittest discover -s tests -p test_jira_qa.py
+npm.cmd run test:desktop
+```
 
-# Required Software
+Если python указывает на неработающий WindowsApps alias, установите настоящий Python или задайте CLAWIQ_TEST_PYTHON для scripts/Test-ClawIQ.ps1.
 
-- Git
-- Python 3.11+
-- Ollama
-- OpenClaw
-- VS Code
-- PowerShell 7 (recommended)
-
----
-
-# Local Models
-
-Required:
-
-- Qwen3
-- Qwen2.5-VL
-
-Optional:
-
-- Additional Ollama-compatible models
-
----
-
-# Environment
-
-Configure:
-
-- OpenAI API Key
-- Gemini API Key (optional)
-- Kimi API Key (optional)
-
-Local models should be preferred whenever possible.
-
----
-
-# Installation
-
-1. Clone repository.
-2. Install Python dependencies.
-3. Install Ollama.
-4. Download required models.
-5. Configure environment variables.
-6. Start OpenClaw.
-7. Start ClawIQ Gateway.
-8. Verify Telegram interface.
-
----
-
-# Verification Checklist
-
-- Gateway starts successfully.
-- Ollama responds.
-- Local model is available.
-- Telegram bot connects.
-- Router selects providers correctly.
-- Logs contain no startup errors.
-
----
-
-# Troubleshooting
-
-Common issues:
-
-- Missing API keys.
-- Ollama not running.
-- Missing local model.
-- Incorrect environment variables.
-- Port already in use.
-
-Refer to:
-
-- BUGS.md
-- MAINTENANCE.md
-
----
-
-# Development Workflow
-
-1. Pull latest changes.
-2. Create feature branch.
-3. Implement changes.
-4. Test locally.
-5. Update documentation if architecture changed.
-6. Commit.
-7. Push.
-8. Create Pull Request.
-
----
-
-# Source of Truth
-
-Architecture:
-- ARCHITECTURE.md
-
-Current sprint:
-- PROJECT_CONTEXT.md
-
-Long-term direction:
-- ROADMAP.md
+Порты: Ollama 11434; legacy Gateway 18789; isolated Jira QA 8787. Desktop использует IPC и file assets, HTTP порт ему не нужен. Lucy ports — в её собственных docs.

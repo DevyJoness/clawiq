@@ -1,0 +1,19 @@
+# Local secrets for Jira QA automation
+automation/jira_qa/.env
+automation/lucy_group_bot/lucy-group-bot.json
+__pycache__/
+*.py[cod]
+automation/lucy_mini_app/runtime.*.log
+automation/lucy_mini_app/runtime.*.png
+.local-tools/
+node_modules/
+dist/
+
+# Legacy Lucy local deployment is preserved here, maintained in ../lucy and its own GitHub repo.
+automation/lucy_group_bot/
+automation/lucy_mini_app/
+apps/lucy_desktop/
+scripts/Start-Lucy*.ps1
+tests/lucy_*.test.mjs
+docs/LUCY_*.md
+Люська.cmd

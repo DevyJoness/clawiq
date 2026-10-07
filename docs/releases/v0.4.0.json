@@ -1,0 +1,8 @@
+{
+  "tag_name": "v0.4.0",
+  "target_commitish": "main",
+  "name": "v0.4.0 — Desktop Foundation",
+  "body": "ClawIQ returns to its original direction as a local-first personal assistant with its own Windows desktop. Lucy is now an independent product in https://github.com/DevyJoness/lucy; its brigade bot behavior is preserved.\n\nImplemented: local Ollama chat, explainable text/code/analysis/image routes, persistent conversations, native PNG/JPEG picker, sandboxed Electron UI, updated architecture/roadmap/ADR and Jira backlog. Legacy Test-Port false positive is fixed.\n\nWindows: extract the complete ClawIQ-0.4.0-windows-x64.zip and run ClawIQ.exe. Install/start Ollama separately; text requires qwen3:14b and images require qwen2.5vl:7b. Node is not required for the portable package.\n\nValidation: core and Lucy regression tests, 6 Jira QA tests, desktop/packaged smoke, real local Qwen3 reply with persisted history.\n\nLocal preview limitations: heuristic routing; no cloud fallback, live web search, tool actions or OpenClaw personal-agent connection; no semantic memory, job auto-resume, signing or auto-update. Conversations are local plaintext; images are not persisted. 8 moderate build-toolchain package findings remain tracked in Jira. See docs/BACKLOG.md for the next milestones.",
+  "draft": false,
+  "prerelease": true
+}

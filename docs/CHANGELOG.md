@@ -1,103 +1,20 @@
-# CHANGELOG
+# Changelog
 
-All notable changes to ClawIQ are documented in this file.
+## 0.4.0 — 2026-10-07 — Desktop Foundation (local preview)
 
-The format follows the Keep a Changelog convention.
+- ClawIQ возвращён к personal assistant: собственный Windows desktop, локальный чат, routing reason и model selection.
+- Persistent conversations, recovery after restart, deletion, failed-request visibility.
+- Text/code/analysis routes через Qwen3; optional local coder; image route через Qwen2.5-VL.
+- Люська выделена в самостоятельный DevyJoness/lucy без изменения игровых правил/runtime. Legacy local deployment сохранён.
+- Product boundaries, roadmap, architecture, setup, testing, ADR и backlog обновлены.
+- Исправлен false-positive Test-Port; добавлен Windows CI и desktop smoke.
 
----
+Known limits: эвристическая маршрутизация; нет cloud/web/tool actions, semantic memory, signed installer и auto-resume jobs. Desktop не использует cloud-first config существующего OpenClaw.
 
-# [Unreleased]
+## История до reset
 
-## Planned
+0.3.0, 15.09.2026: isolated local Jira QA adapter, dormant deployment.
+0.2.x: infrastructure/prompts/doc revisions; Intelligence не считается полностью выполненным.
+0.1.0/0.1.1: OpenClaw/Ollama/Telegram foundation и первые documents/scripts.
 
-### Intelligence
-
-- Personality system improvements
-- Identity refinement
-- Prompt Architecture v2
-- Intelligent Router
-- Memory Foundation
-- Vision workflow improvements
-
-### Platform
-
-- Desktop application foundation
-- Skills architecture
-- Semantic memory
-- Productivity integrations
-
-### Infrastructure
-
-- Improved logging
-- Better error handling
-- Startup validation
-- Health monitoring
-
----
-
-# [0.2.0] - In Development
-
-## Added
-
-- Sprint 3 project structure
-- Updated architecture documentation
-- Unified project documentation
-- Jira-aligned roadmap
-- Current project context
-
-## Changed
-
-- Documentation reorganized
-- Architecture updated to Gateway → Router → Memory → Skills
-- Telegram positioned as one interface rather than the product
-
----
-
-# [0.1.1]
-
-## Added
-
-- Initial documentation
-- Maintenance guide
-- Setup guide
-- Bug tracking
-
-## Improved
-
-- Gateway stability
-- OpenClaw integration
-- Local development workflow
-
----
-
-# [0.1.0]
-
-## Initial Release
-
-### Implemented
-
-- OpenClaw integration
-- Ollama support
-- Telegram interface
-- Local-first development
-- Initial prompt library
-- Repository structure
-
----
-
-# Versioning
-
-Current Development:
-0.2.0
-
-Current Sprint:
-Sprint 3 — Intelligence
-
----
-
-# Related Documents
-
-- PROJECT_CONTEXT.md
-- ROADMAP.md
-- ARCHITECTURE.md
-- BUGS.md
+Подробный предшествующий CHANGELOG сохранён в archive/pre-desktop-reset/CHANGELOG.md. Номера версий прошлого roadmap не являются свидетельством реализации Memory или Desktop в соответствующем историческом релизе.
