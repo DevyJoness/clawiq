@@ -8,7 +8,7 @@ async function list() {
   for(const session of sessions){const button=document.createElement('button');button.textContent=session.title;button.classList.toggle('active',session.id===current?.id);button.addEventListener('click',async()=>{if(busy)return;try{current=await call(window.clawiq.get(session.id));image=null;renderImage();render();await list();}catch(e){error(e.message);}});$('sessions').append(button);}
 }
 function render() {
-  if(!current?.messages.length)return; $('messages').replaceChildren();
+  $('messages').replaceChildren(); if(!current?.messages.length)return;
   for(const message of current.messages){const node=document.createElement('article');node.className='message '+message.role;
     const heading=document.createElement('h3');heading.textContent=message.role==='user'?'Вы':'ClawIQ';
     const body=document.createElement('div');body.className='body';body.textContent=message.content;node.append(heading,body);
