@@ -1,137 +1,15 @@
-# MAINTENANCE
+# Maintenance
 
-_Last updated: 2026-09-15_
+Обновлено: 2026-10-07.
 
-# Purpose
+Перед feature работой: git status, Jira backlog, доступность модели. Не обновляйте providers/models автоматически вместе с запуском приложения.
 
-This document describes routine maintenance procedures for the ClawIQ development environment.
+Периодически: npm audit полного toolchain, node tests, Python legacy tests, desktop smoke и packaged smoke. Не используйте audit --omit=dev как единственное доказательство безопасности Electron сборки: её toolchain объявлен dev dependency.
 
----
+History backup: закройте ClawIQ, скопируйте userData/sessions в защищённое место. Там личные сообщения в plaintext. Не загружайте их в GitHub/Jira. Restore выполняется только при закрытом приложении. Автоматический export/retention/recovery planned.
 
-# Maintenance Schedule
+Legacy Gateway/Ollama health: исправленный Test-Port возвращает TCP Boolean. Это не проверка качества модели. Для desktop смотрите UI readiness и реальный local smoke. Stop-ClawIQ.ps1 останавливает всю найденную Ollama и может повлиять на Люську; не используйте его без понимания общей зависимости.
 
-## Daily
+Люська: отдельный repo/runtime. Не меняйте её token, offset state и schedules через обслуживание personal assistant. Старые local paths сохранены при extraction; перенос процесса на новую папку — отдельное действие, нельзя запускать дубликат polling.
 
-- Pull latest Git changes.
-- Verify Gateway starts correctly.
-- Check Ollama status.
-- Review application logs.
-
----
-
-## Weekly
-
-- Update local models if required.
-- Review Jira sprint progress.
-- Remove obsolete branches.
-- Verify documentation consistency.
-
-## Jira QA adapter
-
-The local Jira QA adapter was released in v0.3.0 but is not currently deployed through a public tunnel. Do not start or expose it as part of normal maintenance until secure outbound tunnel connectivity has been verified.
-
-Current supported workflow: create QA Checklist and Regression/Smoke Test artifacts on demand from a Jira issue key or link. Existing hourly automation remains unchanged.
-
-When deployment resumes:
-
-1. Verify `cloudflared` can reach Cloudflare over TCP or UDP port 7844.
-2. Use only a loopback-bound webhook with a protected secret.
-3. Test with a dedicated non-production Jira issue before enabling the Jira Automation rule.
-4. Keep the hourly automation enabled until the event-driven flow is proven stable.
-
----
-
-## Monthly
-
-- Update Python dependencies.
-- Review OpenClaw updates.
-- Archive completed sprint notes.
-- Clean local cache and temporary files.
-
----
-
-# Health Checklist
-
-Gateway
-
-- Starts without errors
-- Accepts requests
-- Routes correctly
-
-Router
-
-- Chooses local models first
-- Falls back to cloud providers
-- Produces expected routing decisions
-
-Memory
-
-- Stores conversations
-- Restores context
-- No corruption detected
-
-Telegram
-
-- Bot online
-- Receives messages
-- Sends responses
-
----
-
-# Logs
-
-Monitor for:
-
-- Startup failures
-- Provider errors
-- Timeout exceptions
-- Memory errors
-- Router failures
-- Jira QA webhook authentication, Jira REST, or Ollama errors when the adapter is explicitly deployed
-
----
-
-# Backup
-
-Recommended backups:
-
-- Repository
-- Configuration
-- Environment variables
-- Prompt library
-- Documentation
-
----
-
-# Updating
-
-Before updating:
-
-1. Commit current changes.
-2. Pull latest repository.
-3. Update dependencies.
-4. Verify startup.
-5. Execute smoke tests.
-
----
-
-# Incident Response
-
-If ClawIQ becomes unstable:
-
-1. Check logs.
-2. Verify Gateway.
-3. Verify Ollama.
-4. Verify local models.
-5. Verify API keys.
-6. Restart services.
-7. Record issue in BUGS.md if reproducible.
-
----
-
-# Related Documents
-
-- SETUP.md
-- BUGS.md
-- CHANGELOG.md
-- PROJECT_CONTEXT.md
+Jira QA остаётся dormant. Перед tunnel нужно закрыть durable queue, idempotency per evidence revision и test-issue rollout. Утверждение старых документов об hourly automation не считается текущим подтверждённым состоянием.

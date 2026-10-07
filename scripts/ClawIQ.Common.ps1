@@ -13,8 +13,7 @@ function Write-Status($Text) {
 
 function Test-Port($Port) {
   try {
-    $null = Test-NetConnection -ComputerName 127.0.0.1 -Port $Port -WarningAction SilentlyContinue -InformationLevel Quiet
-    return $?
+    return [bool](Test-NetConnection -ComputerName 127.0.0.1 -Port $Port -WarningAction SilentlyContinue -InformationLevel Quiet)
   }
   catch {
     return $false
@@ -41,7 +40,7 @@ function Start-Ollama {
 
   Write-Status "Starting Ollama..."
 
-  Start-Process $OllamaExe
+  Start-Process -FilePath $OllamaExe -WindowStyle Hidden
 
   Wait-Port $OllamaPort
 

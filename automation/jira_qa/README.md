@@ -1,11 +1,3 @@
-# Jira local QA webhook
+# Legacy Jira QA
 
-This package is the isolated Jira Automation entry point. It uses only Python's standard library, talks to Jira Cloud REST API v3, and sends the QA prompt to local Ollama. It has no dependency on Rovo and does not call or modify the OpenClaw Gateway.
-
-Run it from the repository root:
-
-```powershell
-python -m automation.jira_qa.main
-```
-
-Configuration and the Cloudflare/Jira setup are documented in [docs/JIRA_QA_WEBHOOK.md](../../docs/JIRA_QA_WEBHOOK.md).
+Изолированный Python adapter, сохранён для совместимости. Не запускается ClawIQ desktop. Current deployment dormant; `.env.example` — placeholders. Документы: ../../docs/JIRA_QA_WEBHOOK.md. Перед production нужны durable queue и idempotency по evidence revision. Unit tests: python -m unittest discover -s tests -p test_jira_qa.py.

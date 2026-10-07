@@ -1,154 +1,34 @@
-# ROADMAP
+# Roadmap ClawIQ
 
-_Last updated: 2026-09-15_
+Обновлено: 2026-10-07. Миссия: личный local-first AI-ассистент, который сохраняет контекст, выбирает модели и инструменты под запрос, работает через собственные приложения.
 
-# Vision
+## M0 — Desktop Foundation (0.4.0 local preview)
 
-ClawIQ is a local-first personal AI platform designed to evolve into a standalone cross-platform AI operating system.
+- Люська отделена в самостоятельный продукт/repo.
+- Windows personal chat, локальная text/vision маршрутизация, persistent conversation history.
+- Актуальные architecture/product docs и reset backlog.
+- Проверяемые tests/CI и release с честными ограничениями.
 
-The assistant should preserve a single personality, shared memory and consistent behavior regardless of interface or AI provider.
+DoD: local chat получает реальный Ollama ответ, история восстанавливается, Windows package стартует без Node, public Lucy данные не входят в personal package.
 
----
+## M1 — Reliable Intelligence
 
-# Guiding Principles
+Routing quality corpus, model availability/capability checks, durable accepted requests, retries/cancel, явная local/cloud policy. Dedicated OpenClaw personal-agent adapter с permissions и observable execution. DoD: restart не теряет принятые jobs, private data не уходит в cloud без policy, failed tool не выдаётся за успех.
 
-- Local-first by default
-- Model-agnostic architecture
-- Shared memory
-- Modular skills
-- Production-ready engineering
-- Documentation-first development
+## M2 — Memory Foundation
 
----
+Retention, export/delete, backup/recovery, per-scope ownership, preferences и project context. Semantic retrieval вводится после оценки доступного OpenClaw storage и конкретных retrieval scenarios. DoD: изоляция personal/project/third-party контекстов и проверяемый lifecycle данных.
 
-# Phase 1 — Foundation ✅
+## M3 — Desktop Product
 
-Status: Completed
+Streaming, cancel, provider settings, file/image UX, packaging/signing/update flow, accessibility и macOS/Linux smoke. DoD: reproducible signed distribution и usable offline history; отсутствие модели объяснено.
 
-## Goals
+## M4 — Skills & Productivity
 
-- OpenClaw integration
-- Ollama integration
-- Telegram interface
-- Basic gateway
-- Project documentation
-- Local development environment
+Web research, local files, GitHub/Jira/calendar как scoped adapters с approval, evidence/provenance и безопасным failure handling. Legacy Jira QA пересмотреть; его public deployment не является P0 desktop.
 
----
+## M5 — Cross-platform Personal Assistant
 
-# Phase 2 — Intelligence 🚧
+Mobile contract, iPhone/Android clients, optional secure sync, voice. Desktop/core не должны зависеть от Telegram. Multi-agent вводится после стабильных sessions, tools и permissions.
 
-Status: In Progress
-
-Primary Jira Epic: **KAN-7**
-
-## Deliverables
-
-- Personality system
-- Identity rules
-- Prompt Architecture v2
-- Intelligent Router
-- Memory foundation
-- Vision workflow
-- Documentation alignment
-- Testing & QA
-
-Success criteria:
-
-- Stable assistant behaviour
-- Predictable routing
-- Shared conversational context
-- Reliable prompt architecture
-
----
-
-# Phase 3 — Platform
-
-## Objectives
-
-- Native Desktop Application
-- Plugin/Skills framework
-- Local semantic search
-- Knowledge management
-- Background services
-
-Related Epics
-
-- KAN-9 Desktop
-- KAN-10 Memory
-- KAN-12 Productivity
-
----
-
-# Phase 4 — Productivity
-
-## Integrations
-
-- GitHub
-- Jira — local QA adapter released in v0.3.0; event-driven deployment pending secure tunnel connectivity
-- Notion
-- Calendar
-- Gmail
-- Local Files
-
-Goals
-
-- Daily workflow automation
-- Project awareness
-- Long-term memory
-
-### Shipped increment: Jira QA automation
-
-v0.3.0 provides a local-first Jira QA adapter that reads current issue evidence and produces separate QA Checklist and Regression/Smoke Test comments via local Ollama. It is intentionally dormant until a reliable tunnel is available. In the interim, the supported workflow is on-demand QA by Jira issue key or link.
-
----
-
-# Phase 5 — AI OS
-
-## Long-Term Vision
-
-ClawIQ becomes a complete AI operating system featuring:
-
-- Native Windows application
-- Native macOS application
-- Native Linux application
-- Native iPhone application
-- Native Android application
-- Unified memory
-- Multi-provider orchestration
-- Skills ecosystem
-- Multi-agent workflows
-
----
-
-# Success Metrics
-
-Technical
-
-- Stable local-first routing
-- Shared memory
-- Cross-platform architecture
-- Production deployment
-
-Product
-
-- One assistant across all devices
-- Consistent personality
-- Replaceable models
-- Extensible skills
-
----
-
-# Source of Truth
-
-Current implementation:
-- PROJECT_CONTEXT.md
-
-Architecture:
-- ARCHITECTURE.md
-
-Execution:
-- Jira (KAN)
-
-History:
-- CHANGELOG.md
+Релизные номера прошлого плана не означают завершение старых phases: историческая 0.3.0 была Jira QA, а не Memory. Следующий номер определяется реальным shipped increment. Текущая версия — local preview, production-ready остаётся целью.
